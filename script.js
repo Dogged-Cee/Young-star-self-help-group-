@@ -1,161 +1,312 @@
+// LOAD SAVED DATA
 let members = JSON.parse(localStorage.getItem("members")) || [];
 
-let treasurerPassword = localStorage.getItem("treasurerPassword") || "m1234";
+// TREASURER PASSWORD
+let treasurerPassword =
+    localStorage.getItem("treasurerPassword") || "m1234";
+
 let treasurerAccess = false;
 
-function save(){
-localStorage.setItem("members", JSON.stringify(members));
+// SAVE DATA
+function saveData() {
+    localStorage.setItem(
+        "members",
+        JSON.stringify(members)
+    );
+
+    localStorage.setItem(
+        "treasurerPassword",
+        treasurerPassword
+    );
 }
 
-/* SAFE PAGE SWITCH */
-function showPage(page){
+// CHANGE PAGE
+function showPage(pageId) {
 
-document.querySelectorAll(".page").forEach(p=>{
-if(p) p.classList.remove("active");
-});
+    document.querySelectorAll(".page").forEach(page => {
+        page.classList.remove("active");
+    });
 
-let target = document.getElementById(page);
-if(target) target.classList.add("active");
+    document.getElementById(pageId)
+        .classList.add("active");
 
-render();
+    render();
 }
 
-/* SUBMIT */
-function submitPayment(){
+// SUBMIT PAYMENT
+function submitPayment() {
 
-let name = document.getElementById("name")?.value;
-let category = document.getElementById("category")?.value;
-let amount = document.getElementById("amount")?.value;
+    const name =
+        document.getElementById("name").value.trim();
 
-if(!name || !amount){
-alert("Fill all fields");
-return;
+    const category =
+        document.getElementById("category").value;
+
+    const amount =
+        document.getElementById("amount").value;
+
+    if (name === "" || amount === "") {
+        alert("Please fill all fields.");
+        return;
+    }
+
+    const memberId =
+        "YS-" + String(members.length + 1).padStart(3, "0");
+
+    const receipt =
+        "RC-" + Date.now();
+
+    members.push({
+        id: memberId,
+        name: name,
+        category: category,
+        amount: Number(amount),
+        status: "pending",
+        date: new Date().toLocaleString(),
+        approvedDate: "",
+        receipt: receipt
+    });
+
+    saveData();
+
+    alert(
+        "Payment submitted successfully.\nWait for Treasurer approval."
+    );
+
+    document.getElementById("name").value = "";
+    document.getElementById("amount").value = "";
+
+    render();
 }
 
-members.push({
-name,
-category,
-amount,
-status:"pending",
-date:new Date().toLocaleString()
-});
+// TREASURER LOGIN
+function unlockTreasurer() {
 
-save();
-alert("Submitted ✔");
-render();
+    let password =
+        prompt("Enter Treasurer Password");
+
+    if (password === treasurerPassword) {
+
+        treasurerAccess = true;
+
+        showPage("admin");
+
+    } else {
+
+        alert("Incorrect password.");
+    }
 }
 
-/* TREASURER LOGIN */
-function unlockTreasurer(){
+// CHANGE PASSWORD
+function changeTreasurerPassword() {
 
-let pass = prompt("Enter Treasurer Password");
+    if (!treasurerAccess) {
+        alert("Login first.");
+        return;
+    }
 
-if(pass === treasurerPassword){
-treasurerAccess = true;
-showPage("admin");
-}else{
-alert("Wrong password");
-}
-}
+    let newPassword =
+        prompt("Enter new password");
 
-/* CHANGE PASSWORD */
-function changeTreasurerPassword(){
+    if (!newPassword) {
+        return;
+    }
 
-let old = prompt("Current password");
+    treasurerPassword = newPassword;
 
-if(old !== treasurerPassword){
-alert("Wrong password");
-return;
-}
+    saveData();
 
-let newPass = prompt("New password");
-
-treasurerPassword = newPass;
-localStorage.setItem("treasurerPassword", newPass);
-
-alert("Password updated ✔");
+    alert("Password changed successfully.");
 }
 
-/* LOGOUT */
-function logoutTreasurer(){
-treasurerAccess = false;
-showPage("home");
+// APPROVE PAYMENT
+function approve(index) {
+
+    if (!treasurerAccess) {
+        alert("Treasurer login required.");
+        return;
+    }
+
+    members[index].status = "approved";
+
+    members[index].approvedDate =
+        new Date().toLocaleString();
+
+    saveData();
+
+    render();
 }
 
-/* APPROVE */
-function approve(i){
+// RENDER DATA
+function render() {
 
-if(!treasurerAccess){
-alert("Enter password first");
-return;
+    let memberList =
+        document.getElementById("memberList");
+
+    let paymentList =
+        document.getElementById("paymentList");
+
+    let pendingList =
+        document.getElementById("pendingList");
+
+    if (memberList)
+        memberList.innerHTML = "";
+
+    if (paymentList)
+        paymentList.innerHTML = "";
+
+    if (pendingList)
+        pendingList.innerHTML = "";
+
+    let activeMembers = 0;
+    let pendingPayments = 0;
+    let totalMoney = 0;
+
+    members.forEach((member, index) => {
+
+        // PENDING APPROVALS
+        if (member.status === "pending") {
+
+            pendingPayments++;
+
+            if (pendingList) {
+
+                pendingList.innerHTML += `
+                <div class="pending-card">
+                    <h3>${member.name}</h3>
+
+                    <p>
+                        ${member.category}
+                    </p>
+
+                    <p>
+                        KES ${member.amount}
+                    </p>
+
+                    <button
+                    class="approve-btn"
+                    onclick="approve(${index})">
+                    Approve
+                    </button>
+
+                </div>
+                `;
+            }
+        }
+
+        // ACTIVE MEMBERS
+        if (
+            member.status === "approved" &&
+            member.category ===
+            "Registration Fee"
+        ) {
+
+            activeMembers++;
+
+            totalMoney += member.amount;
+
+            if (memberList) {
+
+                memberList.innerHTML += `
+                <div class="member-card">
+
+                    <h3>${member.name}</h3>
+
+                    <p>ID: ${member.id}</p>
+
+                    <p>
+                    Approved:
+                    ${member.approvedDate}
+                    </p>
+
+                    <span class="badge active-badge">
+                    ACTIVE MEMBER
+                    </span>
+
+                </div>
+                `;
+            }
+        }
+
+        // CHAMA PAYMENTS
+        if (
+            member.status === "approved" &&
+            member.category ===
+            "Chama Money"
+        ) {
+
+            totalMoney += member.amount;
+
+            if (paymentList) {
+
+                paymentList.innerHTML += `
+                <div class="chama-card">
+
+                    <h3>${member.name}</h3>
+
+                    <p>
+                    Amount:
+                    KES ${member.amount}
+                    </p>
+
+                    <p>
+                    Receipt:
+                    ${member.receipt}
+                    </p>
+
+                    <p>
+                    Approved:
+                    ${member.approvedDate}
+                    </p>
+
+                    <span class="badge chama-badge">
+                    APPROVED
+                    </span>
+
+                </div>
+                `;
+            }
+        }
+    });
+
+    // HOME PAGE STATS
+    if (document.getElementById("homeMembers")) {
+        document.getElementById(
+            "homeMembers"
+        ).innerText = activeMembers;
+    }
+
+    if (document.getElementById("homePending")) {
+        document.getElementById(
+            "homePending"
+        ).innerText = pendingPayments;
+    }
+
+    if (document.getElementById("homeMoney")) {
+        document.getElementById(
+            "homeMoney"
+        ).innerText = totalMoney;
+    }
+
+    // DASHBOARD STATS
+    if (document.getElementById("activeCount")) {
+        document.getElementById(
+            "activeCount"
+        ).innerText = activeMembers;
+    }
+
+    if (document.getElementById("pendingCount")) {
+        document.getElementById(
+            "pendingCount"
+        ).innerText = pendingPayments;
+    }
+
+    if (document.getElementById("moneyCount")) {
+        document.getElementById(
+            "moneyCount"
+        ).innerText = totalMoney;
+    }
 }
 
-members[i].status = "approved";
-members[i].approvedDate = new Date().toLocaleString();
-
-save();
-render();
-}
-
-/* RENDER SAFE */
-function render(){
-
-let active=0, pending=0, total=0;
-
-let pendingList=document.getElementById("pendingList");
-let memberList=document.getElementById("memberList");
-let paymentList=document.getElementById("paymentList");
-
-if(pendingList) pendingList.innerHTML="";
-if(memberList) memberList.innerHTML="";
-if(paymentList) paymentList.innerHTML="";
-
-members.forEach((m,i)=>{
-
-if(m.status==="pending"){
-pending++;
-
-if(pendingList){
-pendingList.innerHTML+=`
-<div class="card">
-${m.name}<br>
-${m.category}<br>
-KES ${m.amount}<br>
-<button onclick="approve(${i})">Approve</button>
-</div>`;
-}
-}
-
-if(m.status==="approved"){
-active++;
-total += Number(m.amount);
-
-if(memberList){
-memberList.innerHTML+=`
-<div class="card">
-${m.name} ✔
-</div>`;
-}
-}
-
-});
-
-let hm=document.getElementById("homeMembers");
-let hp=document.getElementById("homePending");
-let ht=document.getElementById("homeMoney");
-
-if(hm) hm.innerText=active;
-if(hp) hp.innerText=pending;
-if(ht) ht.innerText=total;
-
-if(document.getElementById("activeCount"))
-document.getElementById("activeCount").innerText=active;
-
-if(document.getElementById("pendingCount"))
-document.getElementById("pendingCount").innerText=pending;
-
-if(document.getElementById("moneyCount"))
-document.getElementById("moneyCount").innerText=total;
-}
-
+// START SYSTEM
 render();
