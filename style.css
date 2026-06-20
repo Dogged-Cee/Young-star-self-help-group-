@@ -1,41 +1,76 @@
-.header{
-    text-align:center;
-    font-size:30px;
-    font-weight:bold;
-    color:#38bdf8;
-    margin-top:20px;
-    letter-spacing:2px;
+body{
+margin:0;
+font-family:Arial;
+background:#0f172a;
+color:white;
 }
 
-.subtitle{
-    text-align:center;
-    color:#cbd5e1;
-    margin-bottom:20px;
+.header{
+text-align:center;
+padding:20px;
+background:#1e293b;
+}
+
+.nav{
+display:flex;
+flex-wrap:wrap;
+gap:8px;
+padding:10px;
+}
+
+.nav button{
+flex:1;
+padding:10px;
+background:#2563eb;
+color:white;
+border:none;
+border-radius:8px;
+}
+
+.page{
+display:none;
+padding:15px;
+}
+
+.active{
+display:block;
+}
+
+.card{
+background:#1e293b;
+padding:15px;
+border-radius:12px;
+margin-top:10px;
+}
+
+input,select{
+width:100%;
+padding:10px;
+margin-top:10px;
+border-radius:8px;
+border:none;
+}
+
+button{
+width:100%;
+padding:10px;
+margin-top:10px;
+background:#2563eb;
+color:white;
+border:none;
+border-radius:8px;
 }
 
 .stats{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:10px;
-    margin-bottom:20px;
+display:flex;
+gap:10px;
+margin-top:10px;
 }
 
-.stat-card{
-    background:rgba(255,255,255,0.08);
-    border-radius:15px;
-    padding:15px;
-    text-align:center;
-    backdrop-filter:blur(10px);
-}
-
-.stat-card h2{
-    color:#22c55e;
-    margin-bottom:5px;
-}
-
-.footer{
-    text-align:center;
-    margin-top:25px;
-    color:#94a3b8;
-    font-size:13px;
+.stat{
+flex:1;
+background:#1e293b;
+padding:10px;
+text-align:center;
+border-radius:10px;
 }
