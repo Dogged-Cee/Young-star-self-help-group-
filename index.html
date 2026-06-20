@@ -9,190 +9,115 @@
 
 <body>
 
-<header class="header">
-    <h1>YOUNG STAR SELF HELP GROUP</h1>
-    <p>Chama & Savings Management System</p>
+<header>
+<h1>YOUNG STAR SELF HELP GROUP</h1>
+<p>Chama & Savings System</p>
 </header>
 
-<nav class="navbar">
-    <button onclick="showPage('home')">🏠 Home</button>
-    <button onclick="showPage('register')">🧾 Register</button>
-    <button onclick="showPage('members')">👥 Members</button>
-    <button onclick="showPage('payments')">💰 Chama</button>
-    <button onclick="unlockTreasurer()">👨‍💼 Dashboard</button>
-    <button onclick="showPage('help')">❓ Help</button>
+<nav>
+<button onclick="showPage('home')">🏠 Home</button>
+<button onclick="showPage('register')">🧾 Register</button>
+<button onclick="showPage('members')">👥 Members</button>
+<button onclick="showPage('payments')">💰 Chama</button>
+<button onclick="showPage('login')">🔐 Login</button>
+<button onclick="unlockTreasurer()">👨‍💼 Dashboard</button>
+<button onclick="showPage('help')">❓ Help</button>
 </nav>
 
 <!-- HOME -->
 <section id="home" class="page active">
+<div class="card">
+<h2>Welcome 👋</h2>
+<p>Manage your chama easily and safely.</p>
+</div>
 
-    <div class="welcome-card">
-        <h2>Welcome 👋</h2>
-        <p>
-            Manage registration, payments, approvals,
-            and member records in one system.
-        </p>
-    </div>
-
-    <div class="stats">
-
-        <div class="stat-box">
-            <h2 id="homeMembers">0</h2>
-            <p>Active Members</p>
-        </div>
-
-        <div class="stat-box">
-            <h2 id="homePending">0</h2>
-            <p>Pending</p>
-        </div>
-
-        <div class="stat-box">
-            <h2 id="homeMoney">0</h2>
-            <p>Total KES</p>
-        </div>
-
-    </div>
-
+<div class="stats">
+<div class="box"><h2 id="homeMembers">0</h2><p>Active</p></div>
+<div class="box"><h2 id="homePending">0</h2><p>Pending</p></div>
+<div class="box"><h2 id="homeMoney">0</h2><p>Total KES</p></div>
+</div>
 </section>
 
 <!-- REGISTER -->
 <section id="register" class="page">
+<div class="card">
+<h2>🧾 Register</h2>
 
-    <div class="card">
+<input id="name" placeholder="Full Name">
 
-        <h2>🧾 Register / Payment</h2>
+<select id="category">
+<option>Registration Fee</option>
+<option>Chama Money</option>
+</select>
 
-        <input type="text"
-               id="name"
-               placeholder="Full Name">
+<input id="amount" placeholder="Amount">
 
-        <select id="category">
-            <option value="Registration Fee">
-                Registration Fee
-            </option>
+<div class="info">
+<p>M-Pesa: 0706199963</p>
+<p>Registration Fee = 50 KES</p>
+</div>
 
-            <option value="Chama Money">
-                Chama Money
-            </option>
-        </select>
-
-        <input type="number"
-               id="amount"
-               placeholder="Amount (KES)">
-
-        <div class="mpesa-box">
-
-            <h3>📲 M-Pesa Payment Procedure</h3>
-
-            <p>1. Open M-Pesa.</p>
-            <p>2. Select Pochi la Biashara.</p>
-            <p>3. Enter number:</p>
-
-            <h2>0706199963</h2>
-
-            <p>4. Enter amount.</p>
-            <p>5. Confirm payment.</p>
-            <p>6. Wait for Treasurer approval.</p>
-
-            <strong>
-                Registration Fee = 50 KES
-            </strong>
-
-        </div>
-
-        <button class="submit-btn"
-                onclick="submitPayment()">
-            Submit Payment
-        </button>
-
-    </div>
-
+<button onclick="submitPayment()">Submit</button>
+</div>
 </section>
 
 <!-- MEMBERS -->
 <section id="members" class="page">
+<h2>👥 Active Members</h2>
 
-    <h2>👥 Active Members</h2>
+<input id="searchMember" placeholder="Search..." onkeyup="searchMembers()">
 
-    <div id="memberList"></div>
-
+<div id="memberList"></div>
 </section>
 
 <!-- CHAMA -->
 <section id="payments" class="page">
+<h2>💰 Chama Payments</h2>
+<div id="paymentList"></div>
+</section>
 
-    <h2>💰 Chama Payments</h2>
+<!-- LOGIN -->
+<section id="login" class="page">
+<div class="card">
+<h2>🔐 Member Login</h2>
 
-    <div id="paymentList"></div>
+<input id="memberId" placeholder="Enter ID (YS-001)">
+<button onclick="memberLogin()">Login</button>
+</div>
 
+<div id="memberProfile"></div>
 </section>
 
 <!-- DASHBOARD -->
 <section id="admin" class="page">
+<div class="card">
+<h2>👨‍💼 TREASURER DASHBOARD</h2>
 
-    <div class="card">
+<div class="stats">
+<div class="box"><h2 id="activeCount">0</h2><p>Active</p></div>
+<div class="box"><h2 id="pendingCount">0</h2><p>Pending</p></div>
+<div class="box"><h2 id="moneyCount">0</h2><p>Total</p></div>
+</div>
 
-        <h2>👨‍💼 TREASURER DASHBOARD</h2>
+<h3>Pending</h3>
+<div id="pendingList"></div>
 
-        <div class="stats">
+<button onclick="changePassword()">Change Password</button>
+<button onclick="logout()">Logout</button>
 
-            <div class="stat-box">
-                <h2 id="activeCount">0</h2>
-                <p>Members</p>
-            </div>
-
-            <div class="stat-box">
-                <h2 id="pendingCount">0</h2>
-                <p>Pending</p>
-            </div>
-
-            <div class="stat-box">
-                <h2 id="moneyCount">0</h2>
-                <p>Total KES</p>
-            </div>
-
-        </div>
-
-        <h3>Pending Approvals</h3>
-
-        <div id="pendingList"></div>
-
-        <button onclick="changeTreasurerPassword()">
-            Change Password
-        </button>
-
-    </div>
-
+</div>
 </section>
 
 <!-- HELP -->
 <section id="help" class="page">
+<div class="card">
+<h2>❓ Help</h2>
 
-    <div class="card">
-
-        <h2>❓ Help</h2>
-
-        <p>Registration Fee: 50 KES</p>
-
-        <p>
-            All payments must be approved by the Treasurer.
-        </p>
-
-        <p>
-            M-Pesa Number: 0706199963
-        </p>
-
-        <p>
-            Contact Treasurer for assistance.
-        </p>
-
-    </div>
-
+<p>Registration Fee = 50 KES</p>
+<p>M-Pesa: 0706199963</p>
+<p>Wait for treasurer approval after payment.</p>
+</div>
 </section>
-
-<footer>
-    © 2026 Young Star Self Help Group
-</footer>
 
 <script src="script.js"></script>
 
