@@ -6,19 +6,17 @@
 <title>Young Star Self Help Group</title>
 
 <link rel="stylesheet" href="style.css">
-
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
 </head>
 
 <body>
 
-<header>
+<header class="header">
 <h1>YOUNG STAR SELF HELP GROUP</h1>
-<p>Chama & Savings System</p>
+<p>Chama & Savings Management System</p>
 </header>
 
-<nav>
+<nav class="nav">
 <button onclick="showPage('home')">🏠 Home</button>
 <button onclick="showPage('register')">🧾 Register</button>
 <button onclick="showPage('members')">👥 Members</button>
@@ -29,7 +27,6 @@
 
 <!-- HOME -->
 <section id="home" class="page active">
-
 <div class="card">
 <h2>Welcome 👋</h2>
 <p>Smart Chama Management System</p>
@@ -40,12 +37,10 @@
 <div class="box"><h2 id="homePending">0</h2><p>Pending</p></div>
 <div class="box"><h2 id="homeMoney">0</h2><p>Total</p></div>
 </div>
-
 </section>
 
 <!-- REGISTER -->
 <section id="register" class="page">
-
 <div class="card">
 
 <h2>🧾 Register Payment</h2>
@@ -57,68 +52,55 @@
 <option>Chama Money</option>
 </select>
 
-<input id="amount" placeholder="Amount">
+<input id="amount" placeholder="Amount (KES)">
 
 <button onclick="submitPayment()">Submit</button>
 
 </div>
-
 </section>
 
 <!-- MEMBERS -->
 <section id="members" class="page">
-
 <h2>👥 Active Members</h2>
 
 <input id="searchMember" placeholder="Search..." onkeyup="searchMembers()">
 
 <div id="memberList"></div>
-
 </section>
 
 <!-- CHAMA -->
 <section id="payments" class="page">
-
 <h2>💰 Chama Payments</h2>
-
 <div id="paymentList"></div>
-
 </section>
 
 <!-- LOGIN -->
 <section id="login" class="page">
-
 <div class="card">
 
 <h2>🔐 Member Login</h2>
-
 <input id="memberId" placeholder="Enter ID">
 <button onclick="memberLogin()">Login</button>
 
 </div>
 
 <div id="memberProfile"></div>
-
 </section>
 
 <!-- DASHBOARD -->
 <section id="admin" class="page">
 
 <div class="card">
-
 <h2>👨‍💼 TREASURER DASHBOARD</h2>
 
 <div class="stats">
-
 <div class="box"><h2 id="activeCount">0</h2><p>Active</p></div>
 <div class="box"><h2 id="pendingCount">0</h2><p>Pending</p></div>
 <div class="box"><h2 id="moneyCount">0</h2><p>Total</p></div>
-
 </div>
 
 <h3>Pending Approvals</h3>
 <div id="pendingList"></div>
-
 </div>
 
 <div class="card">
@@ -132,6 +114,5 @@
 </section>
 
 <script src="script.js"></script>
-
 </body>
 </html>
