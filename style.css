@@ -1,0 +1,41 @@
+.header{
+    text-align:center;
+    font-size:30px;
+    font-weight:bold;
+    color:#38bdf8;
+    margin-top:20px;
+    letter-spacing:2px;
+}
+
+.subtitle{
+    text-align:center;
+    color:#cbd5e1;
+    margin-bottom:20px;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin-bottom:20px;
+}
+
+.stat-card{
+    background:rgba(255,255,255,0.08);
+    border-radius:15px;
+    padding:15px;
+    text-align:center;
+    backdrop-filter:blur(10px);
+}
+
+.stat-card h2{
+    color:#22c55e;
+    margin-bottom:5px;
+}
+
+.footer{
+    text-align:center;
+    margin-top:25px;
+    color:#94a3b8;
+    font-size:13px;
+}

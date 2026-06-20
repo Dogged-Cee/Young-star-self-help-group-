@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<title>Young Star Self Help Group</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header class="header">
+<h1>⭐ YOUNG STAR SELF HELP GROUP</h1>
+<p>Chama & Savings Management System</p>
+</header>
+
+<!-- NAVIGATION -->
+<nav class="nav">
+
+<button onclick="showPage('home')">🏠 Home</button>
+<button onclick="showPage('register')">🧾 Register</button>
+<button onclick="showPage('members')">👥 Members</button>
+<button onclick="showPage('payments')">💰 Chama</button>
+<button onclick="unlockAdmin()">👨‍💼 Dashboard</button>
+
+</nav>
+
+<!-- HOME -->
+<section id="home" class="page active">
+
+<div class="card">
+<h2>Welcome 👋</h2>
+<p>
+Manage registration, payments, approvals and members easily in one system.
+</p>
+</div>
+
+</section>
+
+<!-- REGISTER PAGE -->
+<section id="register" class="page">
+
+<div class="card">
+
+<h2>🧾 Register / Payment</h2>
+
+<input id="name" placeholder="Full Name">
+
+<select id="category">
+<option value="Registration Fee">Registration Fee</option>
+<option value="Chama Money">Chama Money</option>
+</select>
+
+<input id="amount" placeholder="Amount (KES)">
+
+<!-- 💰 M-PESA PAYMENT PROCEDURE -->
+<div class="info">
+
+<h3>📲 M-Pesa Payment Procedure</h3>
+
+<p><b>Step 1:</b> Open M-Pesa on your phone</p>
+
+<p><b>Step 2:</b> Select <b>Lipa na M-Pesa</b></p>
+
+<p><b>Step 3:</b> Choose <b>Buy Goods & Services (Pochi la Biashara)</b></p>
+
+<p><b>Step 4:</b> Enter Number:</p>
+<h2>0706199963</h2>
+
+<p><b>Step 5:</b> Enter Amount:</p>
+<h2>
+Registration Fee = 50 KES
+<br>
+or Chama Contribution (your amount)
+</h2>
+
+<p><b>Step 6:</b> Enter your M-Pesa PIN</p>
+
+<p><b>Step 7:</b> Confirm payment and wait for approval</p>
+
+</div>
+
+<button onclick="submitPayment()">
+Submit Payment
+</button>
+
+</div>
+
+</section>
+
+<!-- ACTIVE MEMBERS -->
+<section id="members" class="page">
+
+<div class="card">
+
+<h2>👥 Active Members</h2>
+
+<div id="memberList"></div>
+
+</div>
+
+</section>
+
+<!-- CHAMA PAYMENTS -->
+<section id="payments" class="page">
+
+<div class="card">
+
+<h2>💰 Chama Payments</h2>
+
+<div id="paymentList"></div>
+
+</div>
+
+</section>
+
+<!-- DASHBOARD -->
+<section id="admin" class="page">
+
+<div class="headerBox">
+<h2>👨‍💼 TREASURER DASHBOARD</h2>
+<p>Protected Approval System</p>
+</div>
+
+<!-- STATS -->
+<div class="stats">
+
+<div class="stat">
+<h2 id="activeCount">0</h2>
+<p>Active Members</p>
+</div>
+
+<div class="stat">
+<h2 id="pendingCount">0</h2>
+<p>Pending Payments</p>
+</div>
+
+<div class="stat">
+<h2 id="paymentCount">0</h2>
+<p>Approved Payments</p>
+</div>
+
+<div class="stat">
+<h2 id="moneyCount">0</h2>
+<p>Total KES</p>
+</div>
+
+</div>
+
+<!-- PENDING LIST -->
+<h3>🧾 Pending Approvals</h3>
+<div id="pendingList"></div>
+
+</section>
+
+<script src="script.js"></script>
+
+</body>
+
+</html>
