@@ -5,13 +5,13 @@ background:#0f172a;
 color:white;
 }
 
-header{
+.header{
 text-align:center;
 background:#1e293b;
 padding:20px;
 }
 
-nav{
+.nav{
 display:flex;
 flex-wrap:wrap;
 gap:10px;
@@ -19,23 +19,47 @@ padding:10px;
 background:#1e293b;
 }
 
-nav button{
+.nav button{
 flex:1;
 padding:10px;
-background:#2563eb;
-color:white;
 border:none;
 border-radius:8px;
+background:#2563eb;
+color:white;
+cursor:pointer;
+transition:0.3s;
 }
 
-.page{display:none;padding:20px;}
-.active{display:block;}
+.nav button:hover{
+transform:translateY(-2px);
+background:#1d4ed8;
+}
+
+.page{
+display:none;
+padding:20px;
+opacity:0;
+transform:translateY(10px);
+transition:0.4s;
+}
+
+.page.active{
+display:block;
+opacity:1;
+transform:translateY(0);
+}
 
 .card,.box{
 background:#1e293b;
 padding:15px;
 border-radius:10px;
 margin-top:10px;
+animation:fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn{
+from{opacity:0;transform:scale(0.95);}
+to{opacity:1;transform:scale(1);}
 }
 
 .stats{
@@ -52,8 +76,8 @@ input,select{
 width:100%;
 padding:10px;
 margin-top:10px;
-border-radius:8px;
 border:none;
+border-radius:8px;
 }
 
 button{
@@ -64,6 +88,12 @@ border:none;
 border-radius:8px;
 background:#10b981;
 color:white;
+cursor:pointer;
+transition:0.3s;
+}
+
+button:hover{
+transform:scale(1.03);
 }
 
 .member-card,.chama-card,.pending-card{
