@@ -4,7 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Young Star Self Help Group</title>
+
 <link rel="stylesheet" href="style.css">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 </head>
 
 <body>
@@ -21,27 +25,30 @@
 <button onclick="showPage('payments')">💰 Chama</button>
 <button onclick="showPage('login')">🔐 Login</button>
 <button onclick="unlockTreasurer()">👨‍💼 Dashboard</button>
-<button onclick="showPage('help')">❓ Help</button>
 </nav>
 
 <!-- HOME -->
 <section id="home" class="page active">
+
 <div class="card">
 <h2>Welcome 👋</h2>
-<p>Manage your chama easily and safely.</p>
+<p>Smart Chama Management System</p>
 </div>
 
 <div class="stats">
 <div class="box"><h2 id="homeMembers">0</h2><p>Active</p></div>
 <div class="box"><h2 id="homePending">0</h2><p>Pending</p></div>
-<div class="box"><h2 id="homeMoney">0</h2><p>Total KES</p></div>
+<div class="box"><h2 id="homeMoney">0</h2><p>Total</p></div>
 </div>
+
 </section>
 
 <!-- REGISTER -->
 <section id="register" class="page">
+
 <div class="card">
-<h2>🧾 Register</h2>
+
+<h2>🧾 Register Payment</h2>
 
 <input id="name" placeholder="Full Name">
 
@@ -52,71 +59,76 @@
 
 <input id="amount" placeholder="Amount">
 
-<div class="info">
-<p>M-Pesa: 0706199963</p>
-<p>Registration Fee = 50 KES</p>
+<button onclick="submitPayment()">Submit</button>
+
 </div>
 
-<button onclick="submitPayment()">Submit</button>
-</div>
 </section>
 
 <!-- MEMBERS -->
 <section id="members" class="page">
+
 <h2>👥 Active Members</h2>
 
 <input id="searchMember" placeholder="Search..." onkeyup="searchMembers()">
 
 <div id="memberList"></div>
+
 </section>
 
 <!-- CHAMA -->
 <section id="payments" class="page">
+
 <h2>💰 Chama Payments</h2>
+
 <div id="paymentList"></div>
+
 </section>
 
 <!-- LOGIN -->
 <section id="login" class="page">
+
 <div class="card">
+
 <h2>🔐 Member Login</h2>
 
-<input id="memberId" placeholder="Enter ID (YS-001)">
+<input id="memberId" placeholder="Enter ID">
 <button onclick="memberLogin()">Login</button>
+
 </div>
 
 <div id="memberProfile"></div>
+
 </section>
 
 <!-- DASHBOARD -->
 <section id="admin" class="page">
+
 <div class="card">
+
 <h2>👨‍💼 TREASURER DASHBOARD</h2>
 
 <div class="stats">
+
 <div class="box"><h2 id="activeCount">0</h2><p>Active</p></div>
 <div class="box"><h2 id="pendingCount">0</h2><p>Pending</p></div>
 <div class="box"><h2 id="moneyCount">0</h2><p>Total</p></div>
+
 </div>
 
-<h3>Pending</h3>
+<h3>Pending Approvals</h3>
 <div id="pendingList"></div>
+
+</div>
+
+<div class="card">
+<h3>📊 Payments Chart</h3>
+<canvas id="paymentChart"></canvas>
+</div>
 
 <button onclick="changePassword()">Change Password</button>
 <button onclick="logout()">Logout</button>
 
-</div>
-</section>
-
-<!-- HELP -->
-<section id="help" class="page">
-<div class="card">
-<h2>❓ Help</h2>
-
-<p>Registration Fee = 50 KES</p>
-<p>M-Pesa: 0706199963</p>
-<p>Wait for treasurer approval after payment.</p>
-</div>
 </section>
 
 <script src="script.js"></script>
