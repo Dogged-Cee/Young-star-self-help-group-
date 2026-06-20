@@ -1,243 +1,74 @@
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial,sans-serif;
-}
-
 body{
-    background:#0f172a;
-    color:white;
-    min-height:100vh;
+margin:0;
+font-family:Arial;
+background:#0f172a;
+color:white;
 }
 
-/* HEADER */
-
-.header{
-    background:#1e293b;
-    text-align:center;
-    padding:25px;
-    border-bottom:3px solid #2563eb;
+header{
+text-align:center;
+background:#1e293b;
+padding:20px;
 }
 
-.header h1{
-    color:#38bdf8;
-    margin-bottom:8px;
-    font-size:32px;
+nav{
+display:flex;
+flex-wrap:wrap;
+gap:8px;
+padding:10px;
+background:#1e293b;
 }
 
-.header p{
-    color:#cbd5e1;
+nav button{
+flex:1;
+padding:10px;
+border:none;
+background:#2563eb;
+color:white;
+border-radius:8px;
 }
 
-/* NAVIGATION */
+.page{display:none;padding:20px;}
+.active{display:block;}
 
-.navbar{
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-    padding:15px;
-    background:#1e293b;
+.card,.box{
+background:#1e293b;
+padding:15px;
+border-radius:10px;
+margin-top:10px;
 }
-
-.navbar button{
-    flex:1;
-    min-width:120px;
-    padding:12px;
-    border:none;
-    border-radius:10px;
-    background:#2563eb;
-    color:white;
-    cursor:pointer;
-    transition:0.3s;
-    font-weight:bold;
-}
-
-.navbar button:hover{
-    background:#1d4ed8;
-    transform:translateY(-2px);
-}
-
-/* PAGES */
-
-.page{
-    display:none;
-    padding:20px;
-}
-
-.active{
-    display:block;
-}
-
-/* CARDS */
-
-.card,
-.welcome-card,
-.mpesa-box{
-    background:#1e293b;
-    padding:20px;
-    border-radius:15px;
-    margin-top:15px;
-    box-shadow:0 4px 10px rgba(0,0,0,0.3);
-}
-
-/* INPUTS */
-
-input,
-select{
-    width:100%;
-    padding:12px;
-    margin-top:10px;
-    border:none;
-    border-radius:10px;
-    background:#334155;
-    color:white;
-}
-
-input::placeholder{
-    color:#cbd5e1;
-}
-
-/* BUTTONS */
-
-button{
-    border:none;
-}
-
-.submit-btn{
-    width:100%;
-    margin-top:15px;
-    padding:14px;
-    border-radius:10px;
-    background:#10b981;
-    color:white;
-    font-size:16px;
-    cursor:pointer;
-}
-
-.submit-btn:hover{
-    background:#059669;
-}
-
-/* STATS */
 
 .stats{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
-    gap:15px;
-    margin-top:20px;
+display:flex;
+gap:10px;
 }
 
-.stat-box{
-    background:#1e293b;
-    padding:20px;
-    border-radius:15px;
-    text-align:center;
+.box{
+flex:1;
+text-align:center;
 }
 
-.stat-box h2{
-    color:#38bdf8;
-    font-size:28px;
+input,select{
+width:100%;
+padding:10px;
+margin-top:10px;
+border-radius:8px;
+border:none;
 }
 
-/* MEMBER CARD */
-
-.member-card{
-    background:#1e293b;
-    border-left:5px solid #10b981;
-    padding:15px;
-    border-radius:10px;
-    margin-top:10px;
+button{
+margin-top:10px;
+padding:10px;
+width:100%;
+border:none;
+border-radius:8px;
+background:#10b981;
+color:white;
 }
 
-/* CHAMA CARD */
-
-.chama-card{
-    background:#1e293b;
-    border-left:5px solid #f59e0b;
-    padding:15px;
-    border-radius:10px;
-    margin-top:10px;
-}
-
-/* PENDING CARD */
-
-.pending-card{
-    background:#1e293b;
-    border-left:5px solid #ef4444;
-    padding:15px;
-    border-radius:10px;
-    margin-top:10px;
-}
-
-/* BADGES */
-
-.badge{
-    display:inline-block;
-    margin-top:10px;
-    padding:5px 10px;
-    border-radius:20px;
-    font-size:12px;
-}
-
-.active-badge{
-    background:#10b981;
-}
-
-.pending-badge{
-    background:#ef4444;
-}
-
-.chama-badge{
-    background:#f59e0b;
-}
-
-/* APPROVE BUTTON */
-
-.approve-btn{
-    width:100%;
-    padding:10px;
-    margin-top:10px;
-    border-radius:8px;
-    background:#10b981;
-    color:white;
-    cursor:pointer;
-}
-
-.approve-btn:hover{
-    background:#059669;
-}
-
-/* HELP PAGE */
-
-#help p{
-    margin-top:10px;
-    line-height:1.6;
-}
-
-/* FOOTER */
-
-footer{
-    text-align:center;
-    padding:20px;
-    background:#1e293b;
-    margin-top:30px;
-    color:#cbd5e1;
-}
-
-/* MOBILE */
-
-@media(max-width:600px){
-
-    .header h1{
-        font-size:24px;
-    }
-
-    .navbar{
-        flex-direction:column;
-    }
-
-    .navbar button{
-        width:100%;
-    }
+.member-card,.chama-card,.pending-card{
+background:#1e293b;
+padding:10px;
+margin-top:10px;
+border-radius:8px;
 }
